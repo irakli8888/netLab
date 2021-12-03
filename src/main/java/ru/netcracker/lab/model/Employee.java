@@ -1,15 +1,14 @@
 package ru.netcracker.lab.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author IrklKvch
+ * @author AverVit
  */
 @Entity
 @Getter
@@ -20,5 +19,13 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String fullName;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Department department;
+
+    private String phoneNumber;
+
+    private double salary;
+
 }

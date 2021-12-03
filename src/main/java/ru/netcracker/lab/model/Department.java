@@ -4,13 +4,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author IrklKvch
+ * @author AverVit
  */
 @Entity
 @Getter
@@ -22,4 +20,7 @@ public class Department {
     private Long id;
 
     private String name;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Employee head;
 }
