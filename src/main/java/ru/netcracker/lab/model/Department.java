@@ -1,7 +1,9 @@
 package ru.netcracker.lab.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,8 +13,8 @@ import javax.persistence.*;
  * @author AverVit
  */
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class Department {
 
     @Id
@@ -23,4 +25,9 @@ public class Department {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Employee head;
+
+    public Department(String name, Employee head) {
+        this.name = name;
+        this.head = head;
+    }
 }
