@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
 
 import javax.persistence.*;
 
@@ -13,7 +14,8 @@ import javax.persistence.*;
  * @author AverVit
  */
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Employee {
     @Id
@@ -26,6 +28,12 @@ public class Employee {
 
     private double salary;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Department department;
+
+    @OneToOne(mappedBy = "chief", cascade = CascadeType.ALL)
+    private Department managedDepartment;
+
     public Employee(String fullName, String phoneNumber, double salary, Department department) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -33,6 +41,5 @@ public class Employee {
         this.department = department;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Department department;
+
 }

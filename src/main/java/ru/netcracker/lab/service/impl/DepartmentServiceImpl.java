@@ -20,8 +20,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void add(String name, long head) {
         Employee employee = employeeRep.getById(head);
-        Department department = new Department(name, employee);
-        departmentRep.save(department);
+//        Department department = new Department(name, employee);
+//        departmentRep.save(department);
     }
 
     @Override

@@ -7,13 +7,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * @author IrklKvch
  * @author AverVit
  */
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Department {
 
@@ -23,11 +25,21 @@ public class Department {
 
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Employee head;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department", fetch = FetchType.LAZY)
+    private Set<Employee> employees;
 
-    public Department(String name, Employee head) {
+//    @OneToOne(cascade = {CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST,
+//            CascadeType.REFRESH})
+    @OneToOne(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH})
+    private Employee chief;
+
+    public Department(String name, Set<Employee> head) {
         this.name = name;
-        this.head = head;
+        this.employees = head;
     }
 }
