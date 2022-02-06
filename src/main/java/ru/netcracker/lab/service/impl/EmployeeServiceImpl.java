@@ -14,6 +14,9 @@ import ru.netcracker.lab.model.api.response.EmployeeResponse;
 import ru.netcracker.lab.model.api.response.EmployeeResponseWithList;
 import ru.netcracker.lab.repository.DepartmentRep;
 import ru.netcracker.lab.repository.EmployeeRep;
+import ru.netcracker.lab.repository.specification.EmployeeSpecificationHolder;
+import ru.netcracker.lab.repository.specification.SearchCriteria;
+import ru.netcracker.lab.repository.specification.SearchOperation;
 import ru.netcracker.lab.service.EmployeeService;
 
 import java.util.List;
@@ -45,16 +48,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         });
     }
 
-//    public List<Employee> findAll() {
-//        return employeeRep.findAll();
-//    }
-
 
     @Override
-    public void update(long id) {
-
-    }
-
     public ResponseEntity<EmployeeResponse> save(EmployeeRequest request) {
         if(request.getFullName() == null || request.getSalary() == 0 || request.getPhoneNumber() == null){
             return ResponseEntity
@@ -99,6 +94,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .body(new EmployeeResponse().save(employeeMapper.convert(employee)));
     }
 
+    @Override
     public ResponseEntity<EmployeeResponse> delete(Long id) {
         if(employeeRep.existsById(id)){
             employeeRep.deleteById(id);
@@ -111,6 +107,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .body(new EmployeeResponse().invalid());
     }
 
+    @Override
     public ResponseEntity<EmployeeResponse> update(EmployeeRequest request, Long id) {
         if(employeeRep.existsById(id)){
             employeeRep.deleteById(id);
@@ -154,7 +151,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .body(new EmployeeResponse().update(employeeMapper.convert(employee)));
     }
 
-
+    @Override
     public ResponseEntity<EmployeeResponse> findById(Long id) {
         if(employeeRep.existsById(id)){
             return ResponseEntity
@@ -165,6 +162,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .body(new EmployeeResponse().invalid());
     }
 
+    @Override
     public ResponseEntity<EmployeeResponseWithList> findAll(){
         Set<EmployeeDto> employeeDtoSet = employeeRep
                 .findAll()
@@ -175,5 +173,19 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .ok()
                 .body(new EmployeeResponseWithList().findAll(employeeDtoSet));
 
+    }
+
+    @Override
+    public ResponseEntity<EmployeeResponseWithList> findAllByCriteria(EmployeeRequest request){
+        EmployeeSpecificationHolder employeeSpecificationHolder = new EmployeeSpecificationHolder();
+        employeeSpecificationHolder.add(new SearchCriteria("fullName", request.getFullName(), SearchOperation.MATCH));
+        Set<EmployeeDto> employeeDtoSet = employeeRep
+                .findAll(employeeSpecificationHolder)
+                .stream()
+                .map(employee -> employeeMapper.convert(employee))
+                .collect(Collectors.toSet());
+        return ResponseEntity
+                .ok()
+                .body(new EmployeeResponseWithList().findAll(employeeDtoSet));
     }
 }

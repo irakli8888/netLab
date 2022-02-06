@@ -11,7 +11,7 @@ import ru.netcracker.lab.model.api.response.EmployeeResponse;
 import ru.netcracker.lab.model.api.response.EmployeeResponseWithList;
 import ru.netcracker.lab.service.impl.DepartmentServiceImpl;
 
-@RequestMapping("/rest/department")
+@RequestMapping("/api/v1/department")
 @RequiredArgsConstructor
 @RestController
 public class DepartmentRestController {

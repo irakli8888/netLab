@@ -9,7 +9,7 @@ import ru.netcracker.lab.model.api.response.EmployeeResponseWithList;
 import ru.netcracker.lab.service.impl.EmployeeServiceImpl;
 import ru.netcracker.lab.model.api.response.EmployeeResponse;
 
-@RequestMapping("/rest/employee")
+@RequestMapping("/api/v1/employee")
 @RequiredArgsConstructor
 @RestController
 public class EmployeeRestController {
@@ -39,6 +39,12 @@ public class EmployeeRestController {
     @GetMapping("/")
     public ResponseEntity<EmployeeResponseWithList> findAll(){
         return employeeService.findAll();
+    }
+    //findAllByCriteria
+
+    @GetMapping("/criteria")
+    public ResponseEntity<EmployeeResponseWithList> findAllByCriteria(@RequestBody EmployeeRequest request){
+        return employeeService.findAllByCriteria(request);
     }
 
 
