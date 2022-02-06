@@ -12,7 +12,5 @@ import ru.netcracker.lab.model.Department;
 public interface DepartmentMapper {
 
     DepartmentMapper INSTANCE = Mappers.getMapper(DepartmentMapper.class);
-    //@Mapping(target = "chief", source = "department.chief.fullName")//?
-    //@Mapping(target = "employees", source = "department.employees")//?
     DepartmentDto convert(Department department);
 }
