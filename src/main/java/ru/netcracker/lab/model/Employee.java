@@ -28,7 +28,8 @@ public class Employee {
 
     private double salary;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    /*(cascade = CascadeType.ALL)*/
+    @ManyToOne
     private Department department;
 
     @OneToOne(mappedBy = "chief", cascade = CascadeType.ALL)

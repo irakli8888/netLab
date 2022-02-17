@@ -1,9 +1,8 @@
 package ru.netcracker.lab.repository.specification;
 
-
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import ru.netcracker.lab.model.Employee;
+import ru.netcracker.lab.model.Department;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -12,13 +11,11 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Component
-public class EmployeeSpecificationHolder implements Specification<Employee> {
-
+public class DepartmentSpecificationHolder implements Specification<Department> {
     private List<SearchCriteria> list;
 
-    public EmployeeSpecificationHolder() {
+    public DepartmentSpecificationHolder() {
         this.list = new ArrayList<>();
     }
 
@@ -26,9 +23,8 @@ public class EmployeeSpecificationHolder implements Specification<Employee> {
         list.add(criteria);
     }
 
-
     @Override
-    public Predicate toPredicate(Root<Employee> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+    public Predicate toPredicate(Root<Department> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         List<Predicate> predicates = new ArrayList<>();
 
         for (SearchCriteria criteria : list) {
@@ -70,5 +66,8 @@ public class EmployeeSpecificationHolder implements Specification<Employee> {
         }
 
         return builder.and(predicates.toArray(new Predicate[0]));
+
     }
+
+
 }

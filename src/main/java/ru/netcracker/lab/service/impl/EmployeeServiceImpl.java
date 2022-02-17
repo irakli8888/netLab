@@ -19,7 +19,6 @@ import ru.netcracker.lab.repository.specification.SearchCriteria;
 import ru.netcracker.lab.repository.specification.SearchOperation;
 import ru.netcracker.lab.service.EmployeeService;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -74,7 +73,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         if(request.getManagedDepartmentName() != null){
             if (departmentRep.existsByName(request.getManagedDepartmentName())){
-               Department department = departmentRep.findByName(request.getManagedDepartmentName());
+               Department department = departmentRep.findByName(request.getManagedDepartmentName()).get();
                department.setChief(employee);
                employee.setManagedDepartment(department);
                 departmentRep.save(department);
@@ -97,6 +96,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public ResponseEntity<EmployeeResponse> delete(Long id) {
         if(employeeRep.existsById(id)){
+
             employeeRep.deleteById(id);
             return ResponseEntity
                     .ok()
@@ -109,12 +109,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public ResponseEntity<EmployeeResponse> update(EmployeeRequest request, Long id) {
-        if(employeeRep.existsById(id)){
+/*        if(employeeRep.existsById(id)){
             employeeRep.deleteById(id);
             return ResponseEntity
                     .ok()
                     .body(new EmployeeResponse().delete());
-        }
+        }*/
         if(request.getFullName() == null || request.getSalary() == 0 || request.getPhoneNumber() == null){
             return ResponseEntity
                     .badRequest()
@@ -126,7 +126,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setFullName(request.getFullName());
         if(request.getDepartmentName() != null){
             if(departmentRep.existsByName(request.getDepartmentName())){
-                Department department = departmentRep.findByName(request.getDepartmentName());
+                Department department = departmentRep.findByName(request.getDepartmentName()).get();
                 employee.setDepartment(department);
             }else {
                 Department department = new Department();
@@ -136,7 +136,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         if(request.getManagedDepartmentName() != null){
             if (departmentRep.existsByName(request.getDepartmentName())){
-                Department department = departmentRep.findByName(request.getManagedDepartmentName());
+                Department department = departmentRep.findByName(request.getManagedDepartmentName()).get();
                 department.setChief(employee);
                 employee.setManagedDepartment(department);
             }else{
@@ -167,7 +167,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Set<EmployeeDto> employeeDtoSet = employeeRep
                 .findAll()
                 .stream()
-                .map(employee -> employeeMapper.convert(employee))
+                .map(employeeMapper::convert)
                 .collect(Collectors.toSet());
         return ResponseEntity
                 .ok()
@@ -182,7 +182,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Set<EmployeeDto> employeeDtoSet = employeeRep
                 .findAll(employeeSpecificationHolder)
                 .stream()
-                .map(employee -> employeeMapper.convert(employee))
+                .map(employeeMapper::convert)
                 .collect(Collectors.toSet());
         return ResponseEntity
                 .ok()

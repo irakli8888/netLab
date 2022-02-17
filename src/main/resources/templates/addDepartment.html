@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,10 +11,75 @@
     <input type="text" name="head" placeholder="Глава отдела" class="form-control"> <br>
     <button type="submit" class="btn btn-success">Добавить</button>
 </form>
+</body>
+</html>-->
 <!--<div th:each="row : ${employee}">-->
 <!--    <h3 class="mt-2" th:text="${row.getFullName()}"></h3>-->
 <!--    <p th:text=" Отдел + ${row.getDepartment().getName()}"/>-->
 <!--    <a class="btn btn-warning" th:href="@{'/employee/' + ${row.id}}">Детальнее</a>-->
 <!--</div>-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Справочная система</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+
+    </div>
+    <nav class="nav">
+        <a class="link employee page" href="addEmployee.html">Сотрудники</a>
+        <a class="link department" href="addDepartment.html">Отдел</a>
+    </nav>
+</header>
+<main class="main">
+    <div class="section-form">
+        <select class="select" onchange="changeSelect()">
+            <option value="add">Добавить отдел</option>
+            <option value="delet">Удалить отдел</option>
+            <option value="update">Изменить отдел</option>
+            <option value="getById">Найти отдел по ID</option>
+        </select>
+
+        <div class="container-select">
+            <form action="http://localhost:8080/api/v1/department/" method="post" class="form active add open">
+                <input type="text" name="departmentName" placeholder="Название отдела" class="form-control"> <br>
+                <input type="text" name="chiefName" placeholder="ФИО главы отдела" class="form-control"> <br>
+                <button type="submit" class="button">Добавить</button>
+            </form>
+
+            <form action="http://localhost:8080/api/v1/department/" method="DELETE" class="form delet" data-deleteHTTP="true">
+                <input type="text" name="id" placeholder="id отдела" class="form-control"> <br>
+                <button type="submit" class="button">Удалить</button>
+            </form>
+
+            <form action="http://localhost:8080/api/v1/department/" method="PUT" class="form update" data-putHTTP="true">
+                <input type="text" name="id" placeholder="id отдела" class="form-control"> <br>
+                <input type="text" name="departmentName" placeholder="Название отдела" class="form-control"> <br>
+                <input type="text" name="chiefName" placeholder="ФИО главы отдела" class="form-control"> <br>
+                <button type="submit" class="button">Обновить</button>
+            </form>
+
+            <form action="http://localhost:8080/api/v1/department/" method="get" class="form getById" data-getByIdDepHTTP="true">
+                <input type="text" name="id" placeholder="id отдела" class="form-control"> <br>
+                <button type="submit" class="button">Найти</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="container">
+    </div>
+
+    <div class="section-answer">
+    </div>
+
+</main>
+<footer class="footer">
+
+</footer>
+<script src="./script.js"></script>
 </body>
 </html>

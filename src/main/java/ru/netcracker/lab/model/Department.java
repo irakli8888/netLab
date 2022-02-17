@@ -35,7 +35,8 @@ public class Department {
     @OneToOne(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST,
-            CascadeType.REFRESH})
+            CascadeType.REFRESH,
+            CascadeType.ALL})
     private Employee chief;
 
     public Department(String name, Set<Employee> head) {

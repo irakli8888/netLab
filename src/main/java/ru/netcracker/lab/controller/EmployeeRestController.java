@@ -9,6 +9,7 @@ import ru.netcracker.lab.model.api.response.EmployeeResponseWithList;
 import ru.netcracker.lab.service.impl.EmployeeServiceImpl;
 import ru.netcracker.lab.model.api.response.EmployeeResponse;
 
+@CrossOrigin
 @RequestMapping("/api/v1/employee")
 @RequiredArgsConstructor
 @RestController

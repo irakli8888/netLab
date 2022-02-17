@@ -2,6 +2,8 @@ package ru.netcracker.lab.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import ru.netcracker.lab.model.api.request.EmployeeRequest;
 
 import java.util.Set;
 
@@ -10,5 +12,6 @@ import java.util.Set;
 public class DepartmentDto {
 
     private String name;
-    private Set<EmployeeDto> employees;
+    private String chief;
+    private Set<EmployeeRequest> employees;
 }

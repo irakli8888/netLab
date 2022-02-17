@@ -3,15 +3,13 @@ package ru.netcracker.lab.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
-import ru.netcracker.lab.model.Department;
 import ru.netcracker.lab.model.Employee;
-
-import java.util.Set;
 
 @Repository
 public interface EmployeeRep extends JpaRepository<Employee, Long>, JpaSpecificationExecutor<Employee> {
 
-//    boolean existsByName(String name);
-//    Set<Employee> findByName(String name);
+    boolean existsByFullName(String name);
+    Employee findByFullName(String name);
+
 
 }
