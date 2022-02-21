@@ -1,10 +1,8 @@
-const containerSelect = document.querySelector('.container-select');
 let previous = document.querySelector('.add');
-
-
-
+let container = document.querySelector('#container');
 
 function changeSelect() {
+    container.innerHTML = '';
     let active = document.querySelector('.active');
     previous.classList.remove('open');
     active.classList.remove('active');
@@ -15,12 +13,11 @@ function changeSelect() {
     previous = valueContainer;
 }
 
-
 const nav = document.querySelector('.nav');
 const page = document.querySelectorAll('.link');
 
-function pageOpen () {
-    page.forEach( item => item.classList.toggle('page'));
+function pageOpen() {
+    page.forEach(item => item.classList.toggle('page'));
 }
 
 nav.addEventListener('click', pageOpen);
@@ -31,34 +28,29 @@ function sendJSON(json) {
     let url = form.action; //
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState !== 4) {
             console.log('Ошибка');
-            return;
-        }
-        else if (xhr.status !== 200) {
+        } else if (xhr.status !== 200) {
             console.log('Ошибка');
-            return;
-        }
-        else {
+        } else {
             console.log('Отправлено');
             console.log(xhr.response);
-            // sendMessage.innerHTML = xhr.responseText;
             form.reset();
         }
     };
     xhr.send(json);
 }
 
-function deleteHTTP(id){
+function deleteHTTP(id) {
     let form = document.querySelector('.active');
     let xhr = new XMLHttpRequest();
     let url = form.action + id;
     xhr.open("DELETE", url, true);
     xhr.send(null);
 }
-function putHTTP(json, id){
+
+function putHTTP(json, id) {
     let form = document.querySelector('.active');
     let xhr = new XMLHttpRequest();
     let url = form.action + id;
@@ -68,20 +60,21 @@ function putHTTP(json, id){
 }
 
 const params = {
-    'id':'Id',
-    'fullName':'ФИО',
-    'department':'Отдел',
-    'phoneNumber':'Номер телефона',
-    'salary':'Зарплата',
-    'name':'Название отдела',
-    'chief':'Глава отдела'
+    'id': 'Id',
+    'fullName': 'ФИО',
+    'department': 'Отдел',
+    'phoneNumber': 'Номер телефона',
+    'salary': 'Зарплата',
+    'name': 'Название отдела',
+    'chief': 'Глава отдела'
 }
 const blackList = ['managedDepartment', 'employees'];
 
-function _(key){
+function _(key) {
     return params[key] ?? key;
 }
-function noBlackList(entry){
+
+function noBlackList(entry) {
     return !blackList.includes(entry[0]);
 }
 
@@ -154,9 +147,7 @@ async function submitForm(event) {
         putHTTP(jsonStr, data["id"]);
         return;
     }
-    /*servRequest(jsonStr, formd.getAttribute("method"));*/
     sendJSON(jsonStr);
-
 }
 
 form.addEventListener('submit', submitForm);

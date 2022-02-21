@@ -2,7 +2,6 @@ package ru.netcracker.lab.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import ru.netcracker.lab.model.api.request.EmployeeRequest;
 
 import java.util.Set;

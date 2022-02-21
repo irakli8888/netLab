@@ -1,11 +1,8 @@
 package ru.netcracker.lab.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.LazyCollection;
 
 import javax.persistence.*;
 
@@ -28,7 +25,6 @@ public class Employee {
 
     private double salary;
 
-    /*(cascade = CascadeType.ALL)*/
     @ManyToOne
     private Department department;
 
@@ -41,6 +37,4 @@ public class Employee {
         this.salary = salary;
         this.department = department;
     }
-
-
 }

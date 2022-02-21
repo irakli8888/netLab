@@ -5,7 +5,6 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.netcracker.lab.dto.EmployeeDto;
-import ru.netcracker.lab.exception.EmployeeNotFoundException;
 import ru.netcracker.lab.mapper.EmployeeMapper;
 import ru.netcracker.lab.model.Department;
 import ru.netcracker.lab.model.Employee;
@@ -29,24 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRep employeeRep;
     private final DepartmentRep departmentRep;
     private final EmployeeMapper employeeMapper = Mappers.getMapper(EmployeeMapper.class);
-
-    @Override
-    public void add(String name, String phoneNumber, Double salary, long idDep) {
-        Department department = departmentRep.getById(idDep);
-        Employee employee = new Employee(name, phoneNumber, salary, department);
-        employeeRep.save(employee);
-//        departmentRep.getById(idDep).setHead(employee);
-//        departmentRep.save(department);
-//else throw new NullInputEmployeeException("Null Input Employee");
-    }
-
-    @Override
-    public Employee get(long id) {
-        return employeeRep.findById(id).orElseThrow(() -> {
-            throw new EmployeeNotFoundException("Employee Not Found");
-        });
-    }
-
 
     @Override
     public ResponseEntity<EmployeeResponse> save(EmployeeRequest request) {

@@ -17,7 +17,7 @@ public class EmployeeResponse {
     private EmployeeDto employeeDto;
     private Enum description;
 
-    public EmployeeResponse invalid(){
+    public EmployeeResponse invalid() {
         error = Errors.INVALID_REQUEST;
         timestamp = LocalDateTime.now();
         return this;

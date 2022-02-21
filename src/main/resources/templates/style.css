@@ -127,3 +127,7 @@ body {
     flex: 0 0 70px;
     background-color: #000000;
 }
+
+.empData {
+    margin-top: 3em;
+}

@@ -9,7 +9,6 @@ import ru.netcracker.lab.model.Employee;
 public interface EmployeeRep extends JpaRepository<Employee, Long>, JpaSpecificationExecutor<Employee> {
 
     boolean existsByFullName(String name);
+
     Employee findByFullName(String name);
-
-
 }

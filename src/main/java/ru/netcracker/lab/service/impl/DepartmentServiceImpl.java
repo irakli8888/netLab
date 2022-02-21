@@ -5,7 +5,6 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.netcracker.lab.dto.DepartmentDto;
-import ru.netcracker.lab.exception.DepartmentNotFoundException;
 import ru.netcracker.lab.mapper.DepartmentMapper;
 import ru.netcracker.lab.model.Department;
 import ru.netcracker.lab.model.Employee;
@@ -29,20 +28,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     private final EmployeeRep employeeRep;
     private final DepartmentRep departmentRep;
     private final DepartmentMapper departmentMapper = Mappers.getMapper(DepartmentMapper.class);
-
-    @Override
-    public void add(String name, long head) {
-        //Employee employee = employeeRep.getById(head);
-//        Department department = new Department(name, employee);
-//        departmentRep.save(department);
-    }
-
-    @Override
-    public Department get(long id) {
-        return departmentRep.findById(id).orElseThrow(()-> {
-            throw new DepartmentNotFoundException("Department Not Found");
-        });
-    }
 
     @Override
     public ResponseEntity<DepartmentResponse> save(DepartmentRequest request) {
@@ -107,12 +92,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public ResponseEntity<DepartmentResponse> update(DepartmentRequest request, Long id) {
-        /*if(employeeRep.existsById(id)){
-            employeeRep.deleteById(id);
-            return ResponseEntity
-                    .ok()
-                    .body(new DepartmentResponse().delete());
-        }*/
         if(request.getDepartmentName() == null){
             return ResponseEntity
                     .badRequest()

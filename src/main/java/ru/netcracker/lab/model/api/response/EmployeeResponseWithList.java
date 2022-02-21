@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EmployeeResponseWithList extends EmployeeResponse{
+public class EmployeeResponseWithList extends EmployeeResponse {
 
     private Set<EmployeeDto> employees;
 

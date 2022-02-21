@@ -1,7 +1,5 @@
 package ru.netcracker.lab.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,10 +26,6 @@ public class Department {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "department", fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
-//    @OneToOne(cascade = {CascadeType.DETACH,
-//            CascadeType.MERGE,
-//            CascadeType.PERSIST,
-//            CascadeType.REFRESH})
     @OneToOne(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST,

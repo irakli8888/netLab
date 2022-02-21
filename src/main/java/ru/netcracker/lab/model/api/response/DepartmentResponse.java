@@ -17,7 +17,7 @@ public class DepartmentResponse {
     private DepartmentDto departmentDto;
     private Enum description;
 
-    public DepartmentResponse invalid(){
+    public DepartmentResponse invalid() {
         error = Errors.INVALID_REQUEST;
         timestamp = LocalDateTime.now();
         return this;
