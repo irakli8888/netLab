@@ -60,13 +60,13 @@ function putHTTP(json, id) {
 }
 
 const params = {
-    'id': 'Id',
-    'fullName': 'ФИО',
-    'department': 'Отдел',
-    'phoneNumber': 'Номер телефона',
-    'salary': 'Зарплата',
-    'name': 'Название отдела',
-    'chief': 'Глава отдела'
+    'id': 'Id:',
+    'fullName': 'ФИО:',
+    'department': 'Отдел:',
+    'phoneNumber': 'Номер телефона:',
+    'salary': 'Зарплата:',
+    'name': 'Название отдела:',
+    'chief': 'Глава отдела:'
 }
 const blackList = ['managedDepartment', 'employees'];
 
